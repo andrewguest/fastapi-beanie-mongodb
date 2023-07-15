@@ -5,8 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
+    container_name: fbm-api
     environment:
       # If not provided, `MONGO_URI` defaults to `mongodb://localhost:27017`
       - MONGO_URI=mongodb://fbm-mongo:27017
@@ -16,6 +17,7 @@ services:
 
   fbm-mongo:
     image: mongo:6-jammy
+    container_name: fbm-db
     volumes:
       - fbm-data:/data/db
 
