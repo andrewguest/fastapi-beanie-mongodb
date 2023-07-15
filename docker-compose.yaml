@@ -10,14 +10,15 @@ services:
     environment:
       # If not provided, `MONGO_URI` defaults to `mongodb://localhost:27017`
       - MONGO_URI=mongodb://fbm-mongo:27017
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fbm-api.rule=Host(`fastapi-beanie-mongodb.aguest.me`)"
     command: gunicorn
     depends_on:
       - fbm-mongo
 
   fbm-mongo:
     image: mongo:6-jammy
-    ports:
-      - '27017:27017'
     volumes:
       - fbm-data:/data/db
 
