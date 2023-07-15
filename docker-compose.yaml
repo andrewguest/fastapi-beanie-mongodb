@@ -11,8 +11,11 @@ services:
       # If not provided, `MONGO_URI` defaults to `mongodb://localhost:27017`
       - MONGO_URI=mongodb://fbm-mongo:27017
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fbm-api.rule=Host(`fastapi-beanie-mongodb.aguest.me`)"
+      - traefik.enable=true
+      - traefik.http.routers.fbm-api.rule=Host(`fastapi-beanie-mongodb.aguest.me`)
+      - traefik.http.routers.fbm-api.tls=true
+      - traefik.http.routers.fbm-api.tls.certresolver=lets-encrypt
+      - traefik.port=80
     networks:
       - traefik
     command: gunicorn
