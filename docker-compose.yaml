@@ -14,7 +14,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.fbm-api.rule=Host(`fastapi-beanie-mongodb.aguest.me`)
       - traefik.http.routers.fbm-api.tls=true
-      - traefik.http.routers.fbm-api.tls.certresolver=lets-encrypt
+      - traefik.http.routers.fbm-api.tls.certresolver=letsencrypt
       - traefik.port=80
     networks:
       - traefik
