@@ -13,14 +13,21 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fbm-api.rule=Host(`fastapi-beanie-mongodb.aguest.me`)"
+    networks:
+      - traefik
     command: gunicorn
     depends_on:
       - fbm-mongo
 
   fbm-mongo:
     image: mongo:6-jammy
+    networks:
+      - traefik
     volumes:
       - fbm-data:/data/db
 
 volumes:
   fbm-data:
+
+networks:
+  traefik:
