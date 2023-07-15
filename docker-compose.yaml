@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  fbm-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      # If not provided, `MONGO_URI` defaults to `mongodb://localhost:27017`
+      - MONGO_URI=mongodb://fbm-mongo:27017
+    command: gunicorn
+    depends_on:
+      - fbm-mongo
+
+  fbm-mongo:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - fbm-data:/data/db
+
+volumes:
+  fbm-data:
