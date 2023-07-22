@@ -13,6 +13,7 @@ async def create_anime(anime: AnimeEntry):
     return anime
 
 
+@router.get("/", response_model=List[AnimeEntry])
 @router.get("/anime", response_model=List[AnimeEntry])
 async def read_anime(limit: Optional[int] = 20):
     anime = await AnimeEntry.find_all().limit(limit).to_list()
