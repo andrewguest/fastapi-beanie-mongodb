@@ -8,18 +8,28 @@ services:
     expose:
       - 8000
     container_name: fbm-api
+    networks:
+      - projects
     environment:
       # If not provided, `MONGO_URI` defaults to `mongodb://localhost:27017`
       - MONGO_URI=mongodb://fbm-mongo:27017
     command: gunicorn
     depends_on:
       - fbm-mongo
+    restart: unless-stopped
 
   fbm-mongo:
     image: mongo:6-jammy
     container_name: fbm-db
+    networks:
+      - projects
     volumes:
       - fbm-data:/data/db
+    restart: unless-stopped
 
 volumes:
   fbm-data:
+
+networks:
+  projects:
+    external: true
