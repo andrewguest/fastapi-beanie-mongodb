@@ -17,6 +17,12 @@ services:
     depends_on:
       - fbm-mongo
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.rule=Host(`anime-api.aguest.me`)"
+      - "traefik.http.routers.whoami.tls=true"
+      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
 
   fbm-mongo:
     image: mongo:6-jammy
@@ -26,6 +32,7 @@ services:
     volumes:
       - fbm-data:/data/db
     restart: unless-stopped
+
 
 volumes:
   fbm-data:
