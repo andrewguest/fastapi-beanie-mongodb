@@ -19,10 +19,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
-      - "traefik.http.routers.whoami.rule=Host(`anime-api.aguest.me`)"
-      - "traefik.http.routers.whoami.tls=true"
-      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
+      - "traefik.http.routers.fmb-api.entrypoints=websecure"
+      - "traefik.http.routers.fmb-api.rule=Host(`anime-api.aguest.me`)"
+      - "traefik.http.routers.fmb-api.tls=true"
+      - "traefik.http.routers.fmb-api.tls.certresolver=myresolver"
 
   fbm-mongo:
     image: mongo:6-jammy
